@@ -1,0 +1,42 @@
+<nav class="navbar navbar-default" ng-controller='usersController as uC'>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">Doctor's Appointments</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a ng-click='uC.logout()' href><span class="glyphicon glyphicon-log-out" ></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-8">
+    Search <input type="text" placeholder='Search' >
+  </div>
+  <div class="col-sm-12">
+    <table class="table table-striped" ng-init='dC.getApps()'>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Patient Name</th>
+          <th>Complaint</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat='x in dC.apps | orderBy: "date" track by $index'
+            ng-if='(dC.dateNow | date: "d M") < (x.date | date: "d M")'>
+
+          <td>{{ x.date | date: 'mediumDate'}}</td>
+          <td>{{ x.time | date: 'shortTime'}}</td>
+          <td>{{ x.user }}</td>
+          <td>{{ x.complaint }} <button ng-click='dC.delete(x._id)'
+                                        ng-if='x.user == dC.user.username'>Cancel</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-12">
+    <button class='btn btn-primary pull-right' ng-click='dC.new()'>Add New Appointment</button>
+  </div>
+</div>

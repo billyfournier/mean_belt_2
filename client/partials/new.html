@@ -1,0 +1,31 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">New Appointment</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a ng-click='aC.cancel()' href>Canel</a></li>
+      <li><a ng-click='aC.make()' href>Add Appointment</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+  <ul ng-repeat='x in aC.errors track by $index'>
+    <li>{{ x }}</li>
+  </ul>
+  <form class='col-sm-8 col-sm-offset-2'>
+     <div class="form-group">
+       <label for="date">Date:</label>
+       <input type="date" class="form-control" min='aC.dateNow' id="date" ng-model='aC.app.date'>
+     </div>
+     <div class="form-group">
+       <label for="time">Time:</label>
+       <input type="time" class="form-control" id="time" ng-model='aC.app.time'>
+     </div>
+     <div class="form form-group">
+      <label for="comment">Complaint:</label>
+      <textarea class="form-control" rows="5" id="comment" ng-model='aC.app.complaint'></textarea>
+    </div>
+  </form>
+</div>
